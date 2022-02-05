@@ -1,6 +1,7 @@
 <script>
   import Welcome from "@/components/Welcome.svelte";
   import Search from "@/components/Search.svelte";
+  import Offers from "@/components/Offers.svelte";
   import { fade } from "svelte/transition";
 
   let title = "Peer 2 Peer Exchange";
@@ -8,6 +9,7 @@
 
 <main transition:fade>
   <Welcome {title} />
+  <Offers />
   <Search />
 </main>
 
