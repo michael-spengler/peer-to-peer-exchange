@@ -1,10 +1,12 @@
 <script>
-    import Map from "./Map.svelte";
+    import Map from "https://raw.githubusercontent.com/HanniBal27-2001/svelte-map/d72894bb5e52feb014be6b17b4a9d1eb939a8b04/Maps.svelte";
 
     let mapComponent
     let inputString = '';
+    let markerCoords = []
 
     function setMapCoordinates() {
+        mapComponent.setMapCenter({lat: 30, long: -97})
         if (inputString === '') {
             alert('Ort eingeben')
             return
@@ -20,7 +22,14 @@
             .then(data => {
                 const firstResult = data[0]
                 if (firstResult) {
-                    mapComponent.setMapCenter([firstResult.lat, firstResult.lon])
+                    const position = {
+                        lat: firstResult.lat,
+                        long: firstResult.lon
+                    }
+                    mapComponent.setMapCenter(position)
+
+                    markerCoords.push(position)
+                    mapComponent.showMarkersForCoords(markerCoords)
                 } else {
                     throw new Error("Ort konnte nicht gefunden werden")
                 }
