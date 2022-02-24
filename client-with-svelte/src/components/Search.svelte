@@ -6,7 +6,6 @@
     let markerCoords = []
 
     function setMapCoordinates() {
-        mapComponent.setMapCenter({lat: 30, long: -97})
         if (inputString === '') {
             alert('Ort eingeben')
             return
