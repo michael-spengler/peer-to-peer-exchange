@@ -4,8 +4,10 @@
   import Offers from "@/components/Offers.svelte";
   import { fade } from "svelte/transition";
 
+
   let title = "Peer 2 Peer Exchange";
 </script>
+
 
 <main transition:fade>
   <Welcome {title} />
