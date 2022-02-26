@@ -1,15 +1,18 @@
 <script>
-    import Map from "https://raw.githubusercontent.com/HanniBal27-2001/svelte-map/d72894bb5e52feb014be6b17b4a9d1eb939a8b04/Maps.svelte";
-    import { onMount } from 'svelte';
+    import Map
+        from "https://raw.githubusercontent.com/HanniBal27-2001/svelte-map/d72894bb5e52feb014be6b17b4a9d1eb939a8b04/Maps.svelte";
+    import {onMount} from 'svelte';
 
     let mapComponent
     let inputString = '';
     let markerCoords = []
-    let selected;
-    let optionNodes = [];
+    let selectedPlace;
+    let places = [];
     const placeholder = "Select Your City";
 
-    function setMapCoordinates() {
+    function getCitys() {
+        selectedPlace = placeholder
+
         if (inputString === '') {
             alert('Ort eingeben')
             return
@@ -23,66 +26,41 @@
         fetch(url)
             .then(response => response.json())
             .then(data => {
-                resetList();
-                data.forEach(function(le){
-                    addListEntry(le.display_name, [le.lat,le.lon]);
-
-                })
+                resetPlaceList();
+                if (data.length > 0) {
+                    data.forEach((result) => {
+                        addListEntry(result.display_name, {lat: result.lat, long: result.lon});
+                    })
+                } else {
+                    throw Error("Kein Ort für Eingabe gefunden")
+                }
             })
             .catch(error => alert(error))
     }
 
-    function resetList(){
-        var i;
-        for(i in optionNodes){
-            document.getElementById("hosting-plan").removeChild(optionNodes[i]);
+    function resetPlaceList() {
+        places = [];
+    }
+
+    // Break the list adding code into a function for easier re-use
+    function addListEntry(placeName, placeCoordinates) {
+        let optionNode = {
+            name: placeName,
+            coordinates: placeCoordinates,
         }
-        selected = null;
-        optionNodes = [];
-        addListEntry(placeholder,placeholder);
+        places.push(optionNode)
     }
 
-      // Break the list adding code into a function for easier re-use
-    function addListEntry(display_name, coordinates) {
-
-        // Create a new option element.
-        var optionNode =  document.createElement("option");
-
-        // Set the value
-        optionNode.value = coordinates;
-        optionNode.selected = false;
-
-        // create a text node and append it to the option element
-        optionNode.appendChild(document.createTextNode(display_name));
-
-        // Add the optionNode to the datalist
-        optionNodes.push(document.getElementById("hosting-plan").appendChild(optionNode));
-
+    function setSelectedPlace() {
+        mapComponent.setMapCenter(selectedPlace.coordinates)
     }
 
-    function setselection(){
-        var i;
-        for(i in optionNodes){
-            if(optionNodes[i].selected){
-                if(optionNodes[i].value != placeholder){
-                    selected = optionNodes[i].value.split(",");
-                    const position = {
-                        lat: selected[0],
-                        long: selected[1]
-                    }
-                    mapComponent.setMapCenter(position)
-                }
-                break;
+    onMount(async () => {
+            const position = {
+                lat: 38.897957,
+                long: -77.036560
             }
-        }
-    }
-
-    onMount( async()=>{
-        const position = {
-                        lat: 38.897957,
-                        long: -77.036560
-                    }
-        mapComponent.setMapCenter(position)
+            mapComponent.setMapCenter(position)
         }
     )
 </script>
@@ -91,10 +69,20 @@
 <br/>
 <Map bind:this={mapComponent} button={true}/>
 <p>
-    <input on:change={setMapCoordinates} bind:value={inputString} type="text" list="hosting-plan" placeholder="...start typing"/>
-    <!-- <button on:click={setMapCoordinates}>Finden</button> -->
-    <select id="hosting-plan" on:change={setselection}/>
-    
+    <input on:change={getCitys} bind:value={inputString}
+           placeholder="...start typing"/>
+
+    {#if places.length !== 0}
+        <select bind:value={selectedPlace} on:change={setSelectedPlace}>
+            <option>{placeholder}</option>
+            {#each places as place}
+                <option value={place}>
+                    {place.name}
+                </option>
+            {/each}
+        </select>
+    {/if}
+
 </p>
 
 {#if inputString !== ''}
