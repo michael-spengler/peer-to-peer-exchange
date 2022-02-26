@@ -1,5 +1,5 @@
 # Contributions file for blockchain lecture 2022 at DHBW-Mannheim
-## Contributors:
+## Contributors
 - Tobias Barz
 - Hannes Rosenthal
 - Daniel Vallelonga
@@ -10,7 +10,7 @@
 ### Working on the peer-to-peer-exchange
 https://github.com/jeanz6/peer-to-peer-exchange - in pair programming sessions
 ## Special contributions
-- opened github issue: https://github.com/crewdevio/Snel/issues/49 - resolved in new version of snel!
+- opened github issue for general usage restriction of snel: https://github.com/crewdevio/Snel/issues/49 - resolved in new version of snel!
 - Tageschallenge Airdrop: https://github.com/distributed-ledger-technology/airdrop/pulls 
-- Erweiterung/Fixes für svelte-map: https://github.com/svelte-reusable-components/svelte-map/pull/1
+- enhancement + fixes for svelte-map: https://github.com/svelte-reusable-components/svelte-map/pull/1
 
