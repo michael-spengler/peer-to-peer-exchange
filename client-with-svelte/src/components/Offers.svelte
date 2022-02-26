@@ -1,8 +1,8 @@
 <script>
 
-	let columns = ["Pair", "Amount in Target", "Location", "Username", "Contact"]
+	let columns = ["Pair", "Amount in Target", "Location", "Username", "Contact", "Offer/Purchase"]
 	let data = [
-    ["EURToETH", "0.1", "49_8", "spengler", "https://t.me/danceplanner"]
+    ["EURToETH", "0.1", "49_8", "spengler", "https://t.me/danceplanner", "Offer"]
   ]
 	let newRow = [...columns];
 	
@@ -11,9 +11,7 @@
         newRow = columns
 	}
 
-	function empty(){
-		document.getElementById("newrow").innerHTML = "";
-	}
+	
 	function deleteRow(rowToBeDeleted) {
 		data = data.filter(row => row != rowToBeDeleted)
 	}
@@ -39,7 +37,7 @@
 	
 	<tr class="new" >
 		{#each newRow as column}
-			<td id="newrow" on:click={() => empty}  contenteditable="true" bind:innerHTML={column} />
+			<td  contenteditable="true" bind:innerHTML={column} />
 		{/each}
 		<button on:click={addRow} >
 	        add
