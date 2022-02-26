@@ -8,4 +8,4 @@
 ## Special contributions
 - opened github issue: https://github.com/crewdevio/Snel/issues/49
 - Tageschallenge Airdrop: https://github.com/crewdevio/Snel/issues/49 - resolved in new version of snel!
-- Working on the peer-to-peer-exchange 
+- Working on the peer-to-peer-exchange: https://github.com/jeanz6/peer-to-peer-exchange 
