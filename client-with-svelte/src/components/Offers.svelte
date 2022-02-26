@@ -1,42 +1,88 @@
 <script>
-    const offers = [
-        {
-            pair: "EURToETH",
-            amountInTarget: 0.1,
-            latitude: 49,
-            longitude: 8,
-            userName: "spengler",
-            telegramLink: "https://t.me/danceplanner",
-        },
-        {
-            pair: "EURToBTC",
-            amountInTarget: 0.1,
-            latitude: 50,
-            longitude: 8,
-            userName: "powerseller",
-            telegramLink: "",
-        },
-    ];
+
+	let columns = ["Pair", "Amount in Target", "Location", "Username", "Contact"]
+	let data = [
+    ["EURToETH", "0.1", "49_8", "spengler", "https://t.me/danceplanner"]
+  ]
+	let newRow = [...columns];
+	
+	function addRow() {
+		data = [...data, [...newRow]]
+        newRow = columns
+	}
+
+	function empty(){
+		document.getElementById("newrow").innerHTML = "";
+	}
+	function deleteRow(rowToBeDeleted) {
+		data = data.filter(row => row != rowToBeDeleted)
+	}
 </script>
 
 <table>
-    <tr>
-        <th>Pair</th>
-        <th>Amount in Target</th>
-        <th>location</th>
-        <th>contact</th>
-    </tr>
-    {#each offers as offer}
-        <tr>
-            <td>{offer.pair}</td>
-            <td>{offer.amountInTarget}</td>
-            <td>{offer.latitude}{offer.longitude}</td>
-            <a href={offer.telegramLink} target="_blank">
-                <td>{offer.telegramLink}</td></a
-            >
-        </tr>
-    {/each}
+	<tr>
+		{#each columns as column}
+			<th>{column}</th>
+		{/each}
+	</tr>
+	
+	{#each data as row}
+		<tr>
+			{#each row as cell}
+			<td contenteditable="true" bind:innerHTML={cell} />
+			{/each}
+			<button on:click={() => deleteRow(row)}>
+				X
+			</button>
+		</tr>
+	{/each}
+	
+	<tr class="new" >
+		{#each newRow as column}
+			<td id="newrow" on:click={() => empty}  contenteditable="true" bind:innerHTML={column} />
+		{/each}
+		<button on:click={addRow} >
+	        add
+        </button>
+	</tr>
 </table>
 
 <style>
+	table {
+		margin-left:auto;
+		margin-right: auto;
+		width:auto;
+		border:3px solid;
+        border-collapse: separate;
+		border-style: solid;
+		
+		width:auto
+    }
+	th {
+	    border:3px solid;
+        border-top-color: aqua;
+		border-style: groove;
+		width:auto;
+		background-color: rgb(112, 119, 182);
+		
+	}
+	td{
+		position: center;
+        border:3px solid;
+        
+	}
+
+	.new {
+		color: grey;
+	}
+	.new td:focus {
+		color: black;
+	}
+
+    [contenteditable] {
+        margin-left:auto;
+		margin-right: auto;
+		width:200px
+		
+      }
 </style>
