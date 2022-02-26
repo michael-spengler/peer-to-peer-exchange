@@ -1,4 +1,5 @@
 <script>
+    <!-- TODO: import map from svelte-map base project if PR is merged, or from deno if improved version is published -->
     import Map
         from "https://raw.githubusercontent.com/HanniBal27-2001/svelte-map/d72894bb5e52feb014be6b17b4a9d1eb939a8b04/Maps.svelte";
     import {onMount} from 'svelte';
@@ -74,9 +75,9 @@ import {fly, fade } from 'svelte/transition';
 	let submitted = false;
 
 	//let newlocation = location;
-	
-	const errMessage = "All the fields are mandatory";		
-	
+
+	const errMessage = "All the fields are mandatory";
+
 	function handleSubmit(e) {
 		isSuccessVisible = true;
 
@@ -84,7 +85,7 @@ import {fly, fade } from 'svelte/transition';
 			isSuccessVisible = false;
 		}, 4000);
 	}
-// ---------------------------------------------------------------- 
+// ----------------------------------------------------------------
 </script>
 
 <p>Where do you want to exchange crypto?</p>
@@ -111,12 +112,12 @@ import {fly, fade } from 'svelte/transition';
     O.K. I'm looking for Crypto Exchange Options in {inputString}.
 {/if}
 
-<h2>Place your offer/purchase request!</h2>	
+<h2>Place your offer/purchase request!</h2>
 
 {#if hasError == true}
 		<p class="error-alert">{errMessage}</p>
 {:else}
-	{#if isSuccessVisible}	
+	{#if isSuccessVisible}
 		<p class="error-alert" transition:fade={{duration:150}}>Data updated successfully</p>
 	{/if}
 {/if}
@@ -138,7 +139,7 @@ import {fly, fade } from 'svelte/transition';
                 </th>
                 </tr>
             </table>
-        </div>        
+        </div>
 
         <div class="form-group">
 			<input type="text" class="form-control" placeholder="Pair e.g. EurToETH" required>
@@ -151,13 +152,13 @@ import {fly, fade } from 'svelte/transition';
 
 		<div class="form-group">
 			<input type="text" class="form-control" bind:value={inputString} placeholder="location"  />
-		
+
 		<!--	<input type="text" class="form-control" placeholder="Location" required>  -->
-		</div> 
-		
+		</div>
+
 		<div class="form-group">
 			<input type="text" class="form-control" placeholder="Telegram User Link" required>
-		</div> 
+		</div>
 
 		<button class="btn btn-full" on:click={() => submitted = true}>Place your offer/request</button>
 	</form>
@@ -171,22 +172,22 @@ import {fly, fade } from 'svelte/transition';
 .container {
 		max-width: 1200px;
 		margin: 0 auto;
-       
+
 	}
     table{
         max-width: 1200px;
         margin: 0 auto;
     }
-	
+
 	h2 {
 		margin-top: 0;
 	}
-	
+
 	.form-group > *,
 	.btn-full {
 		width: 100%;
 	}
-	
+
 	.form-control,
 	.btn-full {
 		border-radius: 3px;
@@ -207,7 +208,7 @@ import {fly, fade } from 'svelte/transition';
 	.submitted input:focus:invalid {
 		outline: 1px solid #c00;
 	}
-	
+
 	.error-alert {
 		border: 1px solid #c00 !important;
 		padding: 6px;
