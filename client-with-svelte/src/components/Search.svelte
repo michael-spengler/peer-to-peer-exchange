@@ -1,5 +1,5 @@
 <script>
-    <!-- TODO: import map from svelte-map base project if PR is merged, or from deno if improved version is published -->
+    // TODO: import map from svelte-map base project if PR is merged, or from deno if improved version is published
     import Map
         from "https://raw.githubusercontent.com/HanniBal27-2001/svelte-map/d72894bb5e52feb014be6b17b4a9d1eb939a8b04/Maps.svelte";
     import {onMount} from 'svelte';
@@ -15,7 +15,7 @@
         selectedPlace = placeholder
 
         if (inputString === '') {
-            alert('Ort eingeben')
+            resetPlaceList()
             return
         }
 
