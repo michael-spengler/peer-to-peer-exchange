@@ -1,4 +1,5 @@
 <script>
+    // import { buyers } from "../query_db";
     const offers = [
         {
             pair: "EURToETH",
@@ -16,7 +17,7 @@
             userName: "powerseller",
             telegramLink: "",
         },
-    ];
+    ];    
 </script>
 
 <table>
@@ -37,6 +38,10 @@
         </tr>
     {/each}
 </table>
+
+<br><br>
+
+<button>Run Connector</button>
 
 <style>
 </style>
