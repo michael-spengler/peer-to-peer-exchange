@@ -9,6 +9,10 @@ Peer 2 Peer Exchange frontend working with snel <https://github.com/crewdevio/Sn
 
 `trex run start`
 
+#### Run deno Backend
+
+`deno run --allow-net --allow-read .\server.ts`
+
 ## client-with-nodejs
 
 Peer 2 Peer Exchange frontend working with nodejs and svelte
