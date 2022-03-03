@@ -10,10 +10,10 @@
       method: 'POST',
       // body: JSON.stringify({"abc": {location}})
       // TODO: Replace hardcoded strings with variables
-      body: JSON.stringify({"pair": "EURtoETF",
-                            "amount": 1.5,
-                            "location": "Frankfurt",
-                            "contact": "testUser",
+      body: JSON.stringify({"pair": "ETFtoEUR",
+                            "amount": 2,
+                            "location": "Stuttgart",
+                            "contact": "florianott",
                             "kindOfOffer": "seller"})
 
     })
