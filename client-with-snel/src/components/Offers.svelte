@@ -1,9 +1,28 @@
 <script>
+	async function getUsers() {
+		const res = await fetch('http://127.0.0.1:3000/queryUsers', {
+			method: 'POST'
+		});
+		const text = await res.json();
+		console.log(text);
 
-	let columns = ["Pair", "Amount in Target", "Location", "Username", "Contact", "Offer/Purchase"]
+		if (res.ok) {
+			return text;
+		} else {
+			throw new Error(text);
+		}
+	}
+
+	// TODO: Edit the table
+	let columns = ["Pair", "Amount in Target", "Location", "Contact", "Offer/Purchase"]
 	let data = [
     ["EURToETH", "0.1", "49_8", "spengler", "https://t.me/danceplanner", "Offer"]
-  ]
+  	]
+	let test_data = getUsers();
+	let test_data1 = [
+		{ pair: "ETFtoEUR", amount: 2, location: "Stuttgart", contact: "florianott"},
+  		{ pair: "ETFtoEUR", amount: 2, location: "Stuttgart", contact: "florianott" }
+	]
 	let newRow = [...columns];
 	
 	function addRow() {
@@ -23,26 +42,25 @@
 			<th>{column}</th>
 		{/each}
 	</tr>
-	
-	{#each data as row}
+	{#await test_data}
+	<tr>
+		<td>Wait for connection</td>
+	</tr>
+	{:then rowData}
+	{#each rowData as {pair, amount, location, contact, trader_type}, i}
 		<tr>
-			{#each row as cell}
-			<td contenteditable="true" bind:innerHTML={cell} />
-			{/each}
-			<button on:click={() => deleteRow(row)}>
-				X
-			</button>
+			<td>{pair}</td>
+			<td>{amount}</td>
+			<td>{location}</td>
+			<td>{contact}</td>
+			<td>{trader_type}</td>
 		</tr>
 	{/each}
-	
-	<tr class="new" >
-		{#each newRow as column}
-			<td  contenteditable="true" bind:innerHTML={column} />
-		{/each}
-		<button on:click={addRow} >
-	        add
-        </button>
+	{:catch error}
+	<tr>
+		<td>Could not connect to Database</td>
 	</tr>
+	{/await}
 </table>
 
 <style>

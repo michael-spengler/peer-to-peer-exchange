@@ -4,7 +4,14 @@
     let hasError = false
     let isSuccessVisible = false
     let submitted = false
-    export let placeString
+    let kindOfOffer = 1
+
+    export let location;
+    export let pair;
+    export let contact;
+    export let amount;
+    export let buyer;
+    export let seller;
 
     const errorMessage = "All fields are mandatory";
 
@@ -15,6 +22,52 @@
             isSuccessVisible = false;
         }, 4000);
     }
+
+
+    async function postToDB() {
+        submitted = true;
+
+        let offerResult = "";
+        if (kindOfOffer == 1) {
+            offerResult = "seller"
+        } else {
+            offerResult = "buyer"
+        }
+
+        let amount_str = String(amount)
+
+
+        /*
+        if (seller == undefined && buyer == '') {
+            kindOfOffer = 'buyer';
+        } else if (seller == '' && buyer == undefined) {
+            kindOfOffer = 'seller';
+        } else {
+            console.log("No kind of offer specified!");
+            return 1;
+        }
+        */
+
+        const res = await fetch('http://127.0.0.1:3000/addUser', {
+            headers: {'Content-Type': 'application/json'},
+            method: 'POST',
+            // body: JSON.stringify({"abc": {location}})
+            // TODO: Replace hardcoded strings with variables
+            /*
+            body: JSON.stringify({"pair": {pair},
+                            "amount": {amount},
+                            "location": {location},
+                            "contact": {contact},
+                            "kindOfOffer": "seller"})
+            */
+            body: JSON.stringify({"pair": {pair},
+                            "amount": amount_str,
+                            "location": {location},
+                            "contact": {contact},
+                            "kindOfOffer": offerResult})
+
+        })
+    } 
 </script>
 
 <h2>Place your offer/purchase request!</h2>
@@ -31,9 +84,9 @@
         <div class="form-group2">
             <table>
                 <tr>
-                    <th><input type="radio" id="offer" name="offerOrPurchase" value="offer">
+                    <th><input type="radio" id="offer" name="offerOrPurchase" bind:group={kindOfOffer} value={1}>
                         <label for="offer">offer</label><br></th>
-                    <th><input type="radio" id="purchase" name="offerOrPurchase" value="purchase">
+                    <th><input type="radio" id="purchase" name="offerOrPurchase" bind:group={kindOfOffer} value={2}>
                         <label for="purchase">purchase </label><br>
                     </th>
                 </tr>
@@ -41,24 +94,24 @@
         </div>
 
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Pair e.g. EurToETH" required>
+            <input type="text" class="form-control" bind:value={pair} placeholder="Pair e.g. EurToETH" required>
         </div>
 
 
         <div class="form-group">
-            <input type="number" class="form-control" step=".1" min="0" placeholder="Amount in target location e.g. 0.1"
+            <input type="number" class="form-control" step=".1" min="0" bind:value={amount} placeholder="Amount in target location e.g. 0.1"
                    required>
         </div>
 
         <div class="form-group">
-            <input type="text" class="form-control" bind:value={placeString} placeholder="location"/>
+            <input type="text" class="form-control" bind:value={location} placeholder="location"/>
         </div>
 
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Telegram User Link" required>
+            <input type="text" class="form-control" bind:value={contact} placeholder="Telegram User Link" required>
         </div>
 
-        <button class="btn btn-full" on:click={() => submitted = true}>Place your offer/request</button>
+        <button class="btn btn-full" on:click="{postToDB}">Place your offer/request</button>
     </form>
 </div>
 

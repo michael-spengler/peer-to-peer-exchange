@@ -17,12 +17,15 @@ const client = await new Client().connect({
 -- Buyer table
 
 CREATE TABLE `peer2peer`.`buyers` (
-  `idsellers` INT NOT NULL AUTO_INCREMENT,
+  `idbuyers` INT NOT NULL AUTO_INCREMENT,
   `pair` VARCHAR(45) NOT NULL,
-  `amount` VARCHAR(45) NOT NULL,
+  `amount` FLOAT NOT NULL,
   `location` VARCHAR(45) NOT NULL,
-  `contact` VARCHAR(51) NOT NULL,
-  PRIMARY KEY (`idsellers`));
+  `contact` VARCHAR(50) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `buyerscol` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idbuyers`));
+
 
 
 -- Seller table
@@ -30,10 +33,12 @@ CREATE TABLE `peer2peer`.`buyers` (
 CREATE TABLE `peer2peer`.`sellers` (
   `idsellers` INT NOT NULL AUTO_INCREMENT,
   `pair` VARCHAR(45) NOT NULL,
-  `amount` VARCHAR(45) NOT NULL,
+  `amount` FLOAT NOT NULL,
   `location` VARCHAR(45) NOT NULL,
-  `contact` VARCHAR(51) NOT NULL,
+  `contact` VARCHAR(50) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idsellers`));
+
 
 */
 
