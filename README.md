@@ -5,6 +5,11 @@ This project enables crypto enthusiasts to buy and sell cryptocurrency without t
 
 Peer 2 Peer Exchange frontend working with snel <https://github.com/crewdevio/Snel>
 
+## Run server
+
+To run the webpage you have to start the snel frontend and the deno backend. 
+The deno backend should be connected to a MySQL database.
+
 #### Run Snel Frontend
 
 `trex run start`
