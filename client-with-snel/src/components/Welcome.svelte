@@ -3,21 +3,6 @@
 
   let user = 'daniel';
   let password = 'password123';
-
-  async function postToDB() {
-    const res = await fetch('http://127.0.0.1:3000/addUser', {
-      headers: {'Content-Type': 'application/json'},
-      method: 'POST',
-      // body: JSON.stringify({"abc": {location}})
-      // TODO: Replace hardcoded strings with variables
-      body: JSON.stringify({"pair": "ETFtoEUR",
-                            "amount": 2,
-                            "location": "Stuttgart",
-                            "contact": "florianott",
-                            "kindOfOffer": "seller"})
-
-    })
-  }
 </script>
 
 <h1>{title}</h1>
@@ -26,8 +11,6 @@
   Here you can buy and sell crypto currencies by finding the right people for
   the deal in your neigbourhood. 
 </p>
-
-<button on:click="{postToDB}">Send it.</button>
 
 <link
   href="https://fonts.googleapis.com/css?family=Overpass:100,400"
